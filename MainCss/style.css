@@ -1,0 +1,71 @@
+body {
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    padding: 0;
+    margin: 0;
+    background: rgb(125,206,255);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#header {
+    text-align: center;
+    user-select: none;
+    position: fixed;
+    width: 100%;
+    font-size: 20px;
+    height: 60px;
+    color: white;
+}
+.navbar {
+    text-align: left;
+    height: 38px;
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
+    width: 100%;
+
+}
+.navbtn {
+    font-size: 30px;
+    background: rgba(0,0,0,0);
+    border: 0.1px solid rgba(0,0,0,0);
+}
+
+.navbtn:hover {
+    background: rgba(0,0,0,0.1);
+    border: 0.1px solid black;
+}
+button:hover {
+    cursor: pointer;
+}
+
+#downloadbtn {
+    float: right;
+}
+
+.body {
+    text-align: left;
+    margin-top:  30px;
+    margin-left: 20px;
+    font-size: 20px;
+}
+.installation {
+    font-weight: bold;
+    width: 525px;
+    resize: none;
+    font-size: 13px;
+    background: rgba(0,0,0,0);
+    border: 2px solid black;
+    outline: rgba(0,0,0,0);
+}
+.usage {
+    font-weight: bold;
+    width: 525px;
+    resize: none;
+    font-size: 13px;
+    background: rgba(0,0,0,0);
+    border: 2px solid black;
+    outline: rgba(0,0,0,0);
+}
