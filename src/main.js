@@ -4,4 +4,3 @@ document.getElementById("homebtn").onclick = function () {
 document.getElementById("downloadbtn").onclick = function () {
     location.href = "downloads.html";
 };
-a
