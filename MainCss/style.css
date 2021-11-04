@@ -3,69 +3,86 @@ body {
     font-family: 'Courier New', monospace;
     padding: 0;
     margin: 0;
-    background: rgb(125,206,255);
+    background: rgb(44, 42, 43);
 }
 
 html {
     scroll-behavior: smooth;
 }
-
-#header {
-    text-align: center;
-    user-select: none;
-    position: fixed;
-    width: 100%;
-    font-size: 20px;
-    height: 60px;
-    color: white;
-}
 .navbar {
-    text-align: left;
-    height: 38px;
-    border-top: 4px solid black;
-    border-bottom: 4px solid black;
+    text-align: center;
+    border-top: 2px solid rgb(239, 234, 225);
+    border-bottom: 2px solid rgb(239, 234, 225);
+    height: 36px;
+    background: rgb(88, 75, 79);
     width: 100%;
 
 }
 .navbtn {
-    font-size: 30px;
+    margin-top: 5px;
+    color: rgb(239, 234, 225);
+    font-size: 15px;
     background: rgba(0,0,0,0);
-    border: 0.1px solid rgba(0,0,0,0);
+    border: 2px solid rgb(239, 234, 225);
 }
 
 .navbtn:hover {
-    background: rgba(0,0,0,0.1);
-    border: 0.1px solid black;
+    color: rgb(208,255,20);
 }
 button:hover {
     cursor: pointer;
 }
 
-#downloadbtn {
-    float: right;
-}
-
 .body {
+    color: rgb(239, 234, 225);
     text-align: left;
     margin-top:  30px;
     margin-left: 20px;
     font-size: 20px;
 }
-.installation {
+#downloadtext {
+    border:2px solid rgb(239, 234, 225);
+    color: rgb(239, 234, 225);
+    border-radius: 5px;
     font-weight: bold;
     width: 525px;
     resize: none;
     font-size: 13px;
     background: rgba(0,0,0,0);
-    border: 2px solid black;
     outline: rgba(0,0,0,0);
 }
-.usage {
-    font-weight: bold;
-    width: 525px;
-    resize: none;
-    font-size: 13px;
-    background: rgba(0,0,0,0);
-    border: 2px solid black;
-    outline: rgba(0,0,0,0);
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(85,206,255,1);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(0,160,255);
+}
+#gitbtn {
+    background-color: rgb(0,0,0,0);
+    border: none;
+    color: rgb(239, 234, 225);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 17px;
+    margin-top: 20px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border: 2px solid rgb(239, 234, 225);
+
+}
+
+#gitbtn:hover {
+    color: rgb(208,255,20);
 }
