@@ -5,9 +5,20 @@ body {
     margin: 0;
     background: rgb(44, 42, 43);
 }
-
 html {
     scroll-behavior: smooth;
+}
+button {
+    margin-top: 5px;
+    color: rgb(239, 234, 225);
+    font-size: 15px;
+    background: rgba(0,0,0,0);
+    border: 2px solid rgb(239, 234, 225);
+}
+button:hover {
+    cursor: pointer;
+    color: rgb(208,255,20);
+    border: 2px solid rgb(208,255,20);
 }
 .navbar {
     text-align: center;
@@ -18,27 +29,28 @@ html {
     width: 100%;
 
 }
-.navbtn {
-    margin-top: 5px;
+.homebody {
     color: rgb(239, 234, 225);
-    font-size: 15px;
-    background: rgba(0,0,0,0);
-    border: 2px solid rgb(239, 234, 225);
+    text-align: center;
+    margin-top:  30px;
+    margin-left: 20px;
+    font-size: 20px;
 }
-
-.navbtn:hover {
-    color: rgb(208,255,20);
-}
-button:hover {
-    cursor: pointer;
-}
-
-.body {
+.downloadbody {
     color: rgb(239, 234, 225);
     text-align: left;
     margin-top:  30px;
     margin-left: 20px;
     font-size: 20px;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(85,206,255,1);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(0,160,255);
 }
 #downloadtext {
     border:2px solid rgb(239, 234, 225);
@@ -51,38 +63,14 @@ button:hover {
     background: rgba(0,0,0,0);
     outline: rgba(0,0,0,0);
 }
-
-/* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(85,206,255,1);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(0,160,255);
-}
 #gitbtn {
     background-color: rgb(0,0,0,0);
-    border: none;
     color: rgb(239, 234, 225);
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
+    padding: 10px 22px;
     font-size: 17px;
-    margin-top: 20px;
-    cursor: pointer;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
     border: 2px solid rgb(239, 234, 225);
-
 }
-
 #gitbtn:hover {
     color: rgb(208,255,20);
+    border: 2px solid rgb(208,255,20);
 }
