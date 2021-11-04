@@ -47,10 +47,10 @@ button:hover {
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(85,206,255,1);
+  background: rgba(85,206,255,0);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(0,160,255);
+  background: rgb(239, 234, 225);
 }
 #downloadtext {
     border:2px solid rgb(239, 234, 225);
@@ -60,6 +60,19 @@ button:hover {
     width: 525px;
     resize: none;
     font-size: 13px;
+    background: rgba(0,0,0,0);
+    outline: rgba(0,0,0,0);
+}
+#intro {
+    text-align: center;
+    border: 0px solid rgb(0,0,0);
+    padding: 10px;
+    color: rgb(239, 234, 225);
+    font-weight: bold;
+    height: 170px;
+    width: 525px;
+    resize: none;
+    font-size: 15px;
     background: rgba(0,0,0,0);
     outline: rgba(0,0,0,0);
 }
