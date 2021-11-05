@@ -87,3 +87,25 @@ button:hover {
     color: rgb(208,255,20);
     border: 2px solid rgb(208,255,20);
 }
+#homedownloadbtn {
+    background-color: rgb(0,0,0,0);
+    color: rgb(239, 234, 225);
+    padding: 10px 22px;
+    font-size: 17px;
+    border: 2px solid rgb(239, 234, 225);
+}
+#homedownloadbtn:hover {
+    color: rgb(208,255,20);
+    border: 2px solid rgb(208,255,20);
+}
+#zipdownload {
+    background-color: rgb(0,0,0,0);
+    color: rgb(239, 234, 225);
+    padding: 10px 22px;
+    font-size: 17px;
+    border: 2px solid rgb(239, 234, 225);
+}
+#zipdownload:hover {
+    color: rgb(208,255,20);
+    border: 2px solid rgb(208,255,20);
+}

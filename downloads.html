@@ -6,8 +6,8 @@
 </head>
 <body>
     <div class="navbar">
-        <button id="homebtn" class="navbtn">HOME</button>
-        <button id="downloadbtn" class="navbtn">DOWNLOADS</button>
+        <button id="homebtn" onclick="redirectHome()" class="navbtn">HOME</button>
+        <button id="downloadbtn" onclick="redirectDownloads()" class="navbtn">DOWNLOADS</button>
     </div>
     <div class="downloadbody">
         <h3>INSTALLATION</h3>
@@ -26,8 +26,8 @@ or
 
 example: $bcpy install margray_2d global (global :- saves to the default python package directory)</textarea>
         <h3>MORE INFO AND SOURCE CODE</h3>
-        <button id="gitbtn">Bcbro2021 on github</button>
-        <br>
+        <button id="gitbtn" onclick="redirectGithub()">Bcbro2021 on github</button>
+        <button id="zipdownload" onclick="downloadzip()">Download .zip</button>
     </div>
     <script src="src/main.js"></script>
 

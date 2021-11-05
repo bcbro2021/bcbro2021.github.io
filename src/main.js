@@ -1,12 +1,16 @@
-document.getElementById("homebtn").onclick = function () {
+function redirectHome() {
     location.href = "index.html";
-};
-document.getElementById("downloadbtn").onclick = function () {
+}
+function redirectDownloads() {
     location.href = "downloads.html";
-};
-document.getElementById("homedownloadbtn").onclick = function () {
-    location.href = "downloads.html";
-};
-document.getElementById("gitbtn").onclick = function () {
+}
+function redirectGithub() {
     location.href = "https://github.com/bcbro2021/bcpy-package-manager";
+};
+function downloadzip() {
+    var zip = document.createElement("a");
+    zip.href = "bcpy-package-manager.zip";
+    zip.setAttribute("download","bcpy-package-manager.zip");
+    document.body.appendChild(zip);
+    zip.click();
 };
