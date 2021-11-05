@@ -53,6 +53,7 @@ button:hover {
     animation-iteration-count: infinite;
 }
 .footer {
+    background: rgb(44, 42, 43);
     text-align: left;
     color: rgb(239, 234, 225);
     padding: 5px 12px;
