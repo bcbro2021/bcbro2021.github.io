@@ -72,3 +72,5 @@ function updateStyling() {
     requestAnimationFrame(updateStyling);
 }
 updateStyling();
+
+console.log("init main!");
