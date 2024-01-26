@@ -66,7 +66,6 @@ const sound = new Howl({
 
 // styling
 const body_inner = document.getElementById("inner");
-const git_btn = document.getElementById("gitbtn");
 
 function updateStyling() {
     body_inner.style.left = (window.innerWidth / 2) - body_inner.clientWidth/2;
