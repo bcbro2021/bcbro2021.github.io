@@ -1,4 +1,4 @@
-console.log("Render.js Initialized!");
+console.log("Render.js v1.0 Initialized!");
 
 const randomRange = (min, max) => {
     return min + Math.random() * (max - min);
