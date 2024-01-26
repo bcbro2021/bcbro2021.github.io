@@ -1,3 +1,5 @@
+console.log("Render.js Initialized!");
+
 const randomRange = (min, max) => {
     return min + Math.random() * (max - min);
 };
