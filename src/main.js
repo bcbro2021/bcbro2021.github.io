@@ -39,6 +39,10 @@ function drawParticles() {
   // Start drawing particles
 drawParticles();
 
+// markdown support
+var element = document.getElementById("aboutme");
+element.innerHTML = MarkdownToHtml.parse(element.innerHTML);
+
 // button click functions
 function displayAboutMe() {
     projects.style.display = "none";
