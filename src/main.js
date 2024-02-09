@@ -60,6 +60,12 @@ function displayProjects() {
 
 document.getElementById('projectsbtn').addEventListener('click', displayProjects);
 
+function redirboards() {
+    window.location.href = "portions/boards.html";
+}
+
+document.getElementById('boards').addEventListener('click', redirboards);
+
 // music
 const sound = new Howl({
     src: ['src/assets/bgm1.mp3'],
