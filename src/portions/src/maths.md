@@ -1,0 +1,15 @@
+## maths - mar 11th
+- real numbers - done
+- polynomials - done
+- triangles - done
+- coordinate geometry - done
+- arithmetic progressions - done
+- statistics - done
+- pair of linear equations in two variables - done
+- circles - done
+- quadratic equations
+- introduction to trigonometry
+- application of trigonometry
+- areas related to circles
+- surface area and volumes
+- probability
