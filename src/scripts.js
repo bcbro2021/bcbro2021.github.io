@@ -1,66 +1,66 @@
+/////// imports
 let tapper = document.getElementById("tapper");
+let font = new FontFace("Smoothie", "url(SmoothieSans.otf)");
+font.load().then(function(font){
 
-// tapping mechanic
+    // with canvas, if this is ommited won't work
+    document.fonts.add(font);
+    console.log('Font loaded');
+  
+});
+
+// particle settings
+const textParticleMan = new TextParticleManager();
+var textspeed = 0.6;
+var textlifespan = 30;
+
+function addScorePart() {
+    textParticleMan.addParticle(
+        randomRange(0,tapper.width),
+        randomRange(0,tapper.height),
+        randomRange(-0.5,0.5),
+        randomRange(-0.5,0.5),
+        textspeed,
+        textlifespan,
+        '#96FF96'
+    );
+}
+
+////// tapping mechanic
+
 //localStorage.removeItem("taps")
-taps = Number( localStorage.getItem("taps"))
+let taps = Number(localStorage.getItem("taps"))
 
 tapper.addEventListener("click",() => {
     taps += 1
+    addScorePart();
     localStorage.setItem("taps",String(taps))
-    console.log(localStorage.getItem("taps"))
+    taps = Number(localStorage.getItem("taps"))
 
 });
 
 
-// rendering
+////// rendering
 let ctx = tapper.getContext("2d");
-const particleMan = new ParticleManager();
 
-// particle settings
-var count = 100;
-var speed = 0.4;
-var lifespan = 400;
-var time_delay = 10;
-
-function addParticle() {
-    particleMan.addParticle(
-        randomRange(0,tapper.width),
-        -5,
-        randomRange(-0.5,0.5),
-        randomRange(5,6),
-        speed,
-        lifespan,
-        '#ffffff'
-    );
-};
-
-let particle_timer = time_delay;
 function draw() {
-    //text
-    ctx.font = "50px Arial";
-    ctx.fillStyle = "white";
-    ctx.fillText("Hello World",100,80);
-
 
     // particles
     tapper.width = window.innerWidth;
     tapper.height = window.innerHeight;
 
-    particle_timer -= 1;
-    if (particle_timer <= 0) {
-        if (particleMan.particles.length < count) {
-            addParticle();
-            particle_timer = time_delay;
-        }
-    }
-    
-
     // Clear the canvas
     ctx.clearRect(0, 0, tapper.width, tapper.height);
 
-    // Update and draw particles
-    particleMan.updateParticles();
-    particleMan.drawParticles(ctx);
+    // update and draw text particles
+    textParticleMan.updateParticles();
+    textParticleMan.drawParticles(ctx,"+1","40px Smoothie");
+
+    // text
+    ctx.font = "50px Smoothie";
+    ctx.fillStyle = "white";
+    ctx.fillText(taps,tapper.width/2 - ctx.measureText(String(taps)).width/2,tapper.height/2);
+
 
     // Request the next animation frame
     requestAnimationFrame(draw);
