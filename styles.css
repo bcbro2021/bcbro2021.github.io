@@ -10,7 +10,7 @@ body {
     
 }
 
-@font-face { font-family: smoothie; src: url('SmoothieSans.otf'); } 
+@font-face { font-family: smoothie; src: url('src/SmoothieSans.otf'); } 
 
 #tapper {
     color: aliceblue;
