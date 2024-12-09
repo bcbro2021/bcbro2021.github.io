@@ -1,9 +1,5 @@
 console.log("Render.js v1.0 Initialized!");
 
-const randomRange = (min, max) => {
-    return min + Math.random() * (max - min);
-};
-
 class Particle {
     constructor(x, y, xDirection, yDirection, speed, lifespan, color) {
         this.x = x;
