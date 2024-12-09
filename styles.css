@@ -13,6 +13,9 @@ body {
 @font-face { font-family: smoothie; src: url('src/SmoothieSans.otf'); } 
 
 #tapper {
+    position: absolute;
+    left: 0;
+    top: 0;
     color: aliceblue;
     background-color: rgb(0, 0, 0);
     border: 0;
@@ -21,4 +24,15 @@ body {
     font-size: x-large;
     user-select: none;
     -webkit-user-select: none;
+}
+
+#reset {
+    font-family: smoothie;
+    font-size: xx-large;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background-color: black;
+    color: white;
+    border: none;
 }

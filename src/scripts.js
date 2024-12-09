@@ -1,5 +1,7 @@
 /////// imports
 let tapper = document.getElementById("tapper");
+let resetBtn = document.getElementById("reset");
+
 let font = new FontFace("Smoothie", "url(SmoothieSans.otf)");
 font.load().then(function(font){
 
@@ -30,9 +32,11 @@ function addScorePart() {
 }
 
 ///// katana
+//localStorage.removeItem("slices")
+let sliceCount = Number(localStorage.getItem("slices"))
 var katanaY = -999;
 var katanaConst = 4;
-var katanaChance = 10;
+var katanaChance = 20;
 var summonKatana = false;
 var katanaSpeed = 30;
 
@@ -48,6 +52,13 @@ function setTaps() {
     taps = Number(localStorage.getItem("taps"))
 }
 
+// setSlices function for saving progress
+function setSlices() {
+    localStorage.setItem("slices",String(sliceCount))
+    sliceCount = Number(localStorage.getItem("slices"))
+}
+
+// tapper
 tapper.addEventListener("click",() => {
     if (summonKatana == false) {
         taps += 1
@@ -57,9 +68,19 @@ tapper.addEventListener("click",() => {
         var katanaChan = Math.round(randomRange(0,katanaChance))
         console.log(katanaChan)
         if (katanaChan == katanaConst) {
+            sliceCount += 1;
+            setSlices();
             summonKatana = true
         }
     }
+});
+
+// reset button
+resetBtn.addEventListener("click",() => {
+    taps = 0;
+    setTaps();
+    sliceCount = 0;
+    setSlices();
 });
 
 
@@ -101,7 +122,12 @@ function draw() {
     }
     katanaAnim();
     ctx.drawImage(img, (tapper.width/2)-roundtonear(tapper.width/2,64)/2, katanaY, roundtonear(tapper.width/2,64), (roundtonear(tapper.width/2,64)));
-    
+
+    // katana slices
+    ctx.font = "30px Smoothie";
+    ctx.fillStyle = "white";
+    var tex = "Katana Slices: " + String(sliceCount)
+    ctx.fillText(tex,10,30);
 
 
     // Request the next animation frame
