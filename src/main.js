@@ -6,51 +6,88 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 
-function createCube(size=(1,1,1),color = {color: 0xffffff}) {
+
+function createCube(size,clr) {
     const geometry = new THREE.BoxGeometry( size[0], size[1], size[2] );
-    const material = new THREE.MeshBasicMaterial(color);
+    const material = new THREE.MeshStandardMaterial( {color: clr});
     const cube = new THREE.Mesh( geometry, material );
+    cube.castShadow = true;
+    cube.recieveShadow = true;
     scene.add( cube );
 
     return cube;
 
 }
 
-const player = createCube();
+// lights
+const light = new THREE.SpotLight()
+light.position.set(0, 3, 6)
+// for shadow
+light.castShadow = true
+light.shadow.mapSize.width = 1024
+light.shadow.mapSize.height = 1024
+light.shadow.camera.near = 0.5
+light.shadow.camera.far = 100
+scene.add(light)
 
-// obstacle
-var cubes = []
-for(let i=0;i < 2;i++) {
-    const cube = createCube();
-    cube.position.z = -20;
-    cubes.push(cube);
-}
-
-
-const cube_pos_ops = [-4,0,4]
 
 camera.position.z = 6;
 camera.position.y = 2;
 
+// player
+const player = createCube((1,1,1),0xffffff);
+// floor
+const floor = createCube((1,1,1),0x808080);
+floor.position.y = -1;
+floor.position.z = -20
+floor.scale.x = 10
+floor.scale.z = 50
+
+// obstacle
+var cubes = []
+for(let i=0;i < 2;i++) {
+    const cube = createCube((1,1,1),0xFF6464);
+    cube.position.z = -40;
+    cubes.push(cube);
+}
+const cube_pos_ops = [-4,0,4]
+
+// score dis
+const score_dis = document.getElementById("score");
+var score = 0
+var add_score = false
+
+// animation
 function animate() {
     // camera following player
     camera.position.x = player.position.x;
 
     for (let i = 0;i < cubes.length;i++) {
-        cubes[i].position.z += 0.2;
+        cubes[i].position.z += 0.5;
         if (cubes[i].position.z > 4.5) {
             cubes[i].position.x = cube_pos_ops[Math.round(randomRange(0,2))]
-            cubes[i].position.z = -20
+            cubes[i].position.z = -40
+            add_score = true
         }
     }
-    
+
+    // score
+    if (add_score == true) {
+        score += 1;
+        add_score = false;
+    }
+    score_dis.innerHTML = String(score)
 
 	renderer.render( scene, camera );
 
 }
 
+
+// rendering
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
 
 // movement

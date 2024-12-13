@@ -1,0 +1,17 @@
+@font-face {
+    font-family: font;
+    src: url(src/SmoothieSans.otf);
+}
+
+#score {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+
+    color: white;
+    font-family: font;
+    font-size: 10vh;
+    
+    
+}
