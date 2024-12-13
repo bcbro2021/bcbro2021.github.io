@@ -45,12 +45,14 @@ floor.scale.z = 50
 
 // obstacle
 var cubes = []
+const cube_pos_ops = [-4,0,4]
+const cube_start_pos = -60;
 for(let i=0;i < 2;i++) {
     const cube = createCube((1,1,1),0xFF6464);
-    cube.position.z = -40;
+    cube.position.z = cube_start_pos;
     cubes.push(cube);
 }
-const cube_pos_ops = [-4,0,4]
+
 
 // score dis
 const score_dis = document.getElementById("score");
@@ -66,7 +68,7 @@ function animate() {
         cubes[i].position.z += 0.5;
         if (cubes[i].position.z > 4.5) {
             cubes[i].position.x = cube_pos_ops[Math.round(randomRange(0,2))]
-            cubes[i].position.z = -40
+            cubes[i].position.z = cube_start_pos;
             add_score = true
         }
     }
