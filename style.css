@@ -59,6 +59,7 @@ html {
 }
 
 #restart {
+    text-align: center;
     margin: 0;
     font-family: font;
     font-size: 4.5vh;
@@ -84,6 +85,7 @@ html {
 }
 
 #playbtn {
+    text-align: center;
     margin-top: 40vh;
     font-family: font;
     font-size: 5.5vh;
