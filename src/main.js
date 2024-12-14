@@ -33,9 +33,13 @@ function checkTouching(a, d) {
 }
 
 function death(){
-    alert("you died!")
-    localStorage.setItem("score", String(score));
-    location.reload()
+    dead = true;
+    var deathdis = document.getElementById("deathdis");
+    deathdis.style.display = "block";
+
+    if (score > hiscore) {
+        localStorage.setItem("score", String(score));
+    }
 }
 
 const scene = new THREE.Scene();
@@ -67,11 +71,18 @@ camera.position.y = 2;
 
 // player
 const player = createCube((1,1,1),0xffffff);
+var dead = false;
 var target_pos = 0;
 var moveLeft = false;
 var moveRight = false;
 var moveSpacingX = 4;
 const pspeed = 0.7;
+
+var pjumpspeed = 0.4;
+var pgravspeed = 0.3;
+var jumpHeight = 3;
+var jumping = false;
+var onFloor = true;
 
 // floor
 const floor = createCube((1,1,1),0x808080);
@@ -97,56 +108,77 @@ for(let i=0;i < 5;i++) {
 
 // score dis
 const score_dis = document.getElementById("score");
-const hiscore_dis = document.getElementById("hiscore");
-hiscore_dis.innerHTML = localStorage.getItem("score")
 var score = 0
 var add_score = false
 
+const hiscore_dis = document.getElementById("hiscore");
+var hiscore = Number(localStorage.getItem("score"))
+hiscore_dis.innerHTML = hiscore
+
+
 // animation
 function animate() {
-    // camera following player
-    camera.position.x = player.position.x;
+    if (dead == false){
+        // camera following player
+        camera.position.x = player.position.x;
+        camera.position.y = player.position.y + 2;
 
-    for (let i = 0;i < cubes.length;i++) {
-        cubes[i].position.z += cubeSpeed;
-        if (cubes[i].position.z > 4.5) {
-            cubes[i].position.x = cube_pos_ops[Math.round(randomRange(0,2))]
-            cubes[i].position.z = -Math.round(randomRange(cubeStartMin,cubeStartMax)/cubeMinSpacing)*cubeMinSpacing;
-            add_score = true
+        for (let i = 0;i < cubes.length;i++) {
+            cubes[i].position.z += cubeSpeed;
+            if (cubes[i].position.z > 4.5) {
+                cubes[i].position.x = cube_pos_ops[Math.round(randomRange(0,2))]
+                cubes[i].position.z = -Math.round(randomRange(cubeStartMin,cubeStartMax)/cubeMinSpacing)*cubeMinSpacing;
+                add_score = true
+            }
+
+            if (checkTouching(player,cubes[i])) {
+                death()
+            }
         }
 
-        if (checkTouching(player,cubes[i])) {
-            death()
+        // score
+        if (add_score == true) {
+            score += 1;
+            add_score = false;
         }
-    }
+        score_dis.innerHTML = String(score)
 
-    // score
-    if (add_score == true) {
-        score += 1;
-        add_score = false;
-    }
-    score_dis.innerHTML = String(score)
+        // movement
+        if (moveRight == true) {
+            if (player.position.x > target_pos) {
+                player.position.x -= pspeed
+            } else {
+                player.position.x = target_pos
+                moveRight = false;
+                target_pos = 0;
+            }
+        } else if (moveLeft == true) {
+            if (player.position.x < target_pos) {
+                player.position.x += pspeed
+            } else {
+                player.position.x = target_pos
+                moveLeft = false;
+                target_pos = 0;
+            }
+        }
 
-    // movement
-    if (moveRight == true) {
-        if (player.position.x > target_pos) {
-            player.position.x -= pspeed
+        // gravity and jumping
+        if (jumping) {
+            player.position.y += pjumpspeed;
+            if (player.position.y >= jumpHeight) {
+                jumping = false;
+            }
         } else {
-            player.position.x = target_pos
-            moveRight = false;
-            target_pos = 0;
+            player.position.y -= pgravspeed;
+            if (player.position.y <= 0) {
+                player.position.y = 0;
+                onFloor = true;
+            }
         }
-    } else if (moveLeft == true) {
-        if (player.position.x < target_pos) {
-            player.position.x += pspeed
-        } else {
-            player.position.x = target_pos
-            moveLeft = false;
-            target_pos = 0;
-        }
-    }
+        
 
-	renderer.render( scene, camera );
+        renderer.render( scene, camera );
+    }
 
 }
 
@@ -202,12 +234,20 @@ function handleTouchMove(evt) {
         }                       
     } else {
         if ( yDiff > 0 ) {
+            if (onFloor == true) {
+                jumping = true;
+                onFloor = false;
+            }
             
         } else { 
-            /* up swipe */
+            
         }                                                                 
     }
     /* reset values */
     xDown = null;
     yDown = null;                                             
 };
+
+document.getElementById("restart").addEventListener("click",(ev)=> {
+    location.reload();
+})
