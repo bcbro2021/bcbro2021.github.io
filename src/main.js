@@ -36,12 +36,14 @@ function death(){
     dead = true;
     var deathdis = document.getElementById("deathdis");
     deathdis.style.display = "block";
+    deathdis.style.animation = "fadeIn 2s";
 
     if (score > hiscore) {
         localStorage.setItem("score", String(score));
     }
 }
 
+// renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -51,6 +53,8 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 // rendering
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
+
+// shadow
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
@@ -65,14 +69,14 @@ light.shadow.camera.near = 0.5
 light.shadow.camera.far = 100
 scene.add(light)
 
-
+// camera setup
 camera.position.z = 6;
 camera.position.y = 2;
 
 // player
 const player = createCube((1,1,1),0xffffff);
-var dead = false;
-var target_pos = 0;
+var dead = true;
+var targetPos = 0;
 var moveLeft = false;
 var moveRight = false;
 var moveSpacingX = 4;
@@ -98,6 +102,7 @@ const cubeStartMin = 60;
 const cubeStartMax = 100;
 const cubeSpeed = 0.7;
 const cubeMinSpacing = 10;
+
 for(let i=0;i < 5;i++) {
     const cube = createCube((1,1,1),0xFF6464);
     cube.position.x = cube_pos_ops[Math.round(randomRange(0,2))]
@@ -145,20 +150,20 @@ function animate() {
 
         // movement
         if (moveRight == true) {
-            if (player.position.x > target_pos) {
+            if (player.position.x > targetPos) {
                 player.position.x -= pspeed
             } else {
-                player.position.x = target_pos
+                player.position.x = targetPos
                 moveRight = false;
-                target_pos = 0;
+                targetPos = 0;
             }
         } else if (moveLeft == true) {
-            if (player.position.x < target_pos) {
+            if (player.position.x < targetPos) {
                 player.position.x += pspeed
             } else {
-                player.position.x = target_pos
+                player.position.x = targetPos
                 moveLeft = false;
-                target_pos = 0;
+                targetPos = 0;
             }
         }
 
@@ -177,8 +182,10 @@ function animate() {
         }
         
 
-        renderer.render( scene, camera );
+        
     }
+
+    renderer.render( scene, camera );
 
 }
 
@@ -214,20 +221,20 @@ function handleTouchMove(evt) {
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) { // right swipe
             if (player.position.x == 0) {
-                target_pos = -moveSpacingX;
+                targetPos = -moveSpacingX;
             }
             else if (player.position.x == -moveSpacingX) {
-                target_pos = 0;
+                targetPos = 0;
             }
 
             moveRight = true;
 
         } else { // left swipe
             if (player.position.x == 0) {
-                target_pos = moveSpacingX;
+                targetPos = moveSpacingX;
             } 
             else if (player.position.x == moveSpacingX) {
-                target_pos = 0;
+                targetPos = 0;
             }
 
             moveLeft = true;
@@ -247,6 +254,13 @@ function handleTouchMove(evt) {
     xDown = null;
     yDown = null;                                             
 };
+
+document.getElementById("playbtn").addEventListener("click",(ev)=> {
+    var menu = document.getElementById("mainmenu");
+    menu.style.display = "none";
+    dead = false;
+
+})
 
 document.getElementById("restart").addEventListener("click",(ev)=> {
     location.reload();
