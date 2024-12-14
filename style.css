@@ -13,13 +13,21 @@ html {
 
 #score {
     position: absolute;
-    top: 20px;
+    top: 1vh;
     width: 100%;
     text-align: center;
 
     color: white;
     font-family: font;
     font-size: 10vh;
-    
-    
+}
+#hiscore {
+    position: absolute;
+    top: 11vh;
+    width: 100%;
+    text-align: center;
+
+    color: rgb(255, 255, 255);
+    font-family: font;
+    font-size: 5vh;
 }

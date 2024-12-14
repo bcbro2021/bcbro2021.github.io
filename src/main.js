@@ -34,6 +34,7 @@ function checkTouching(a, d) {
 
 function death(){
     alert("you died!")
+    localStorage.setItem("score", String(score));
     location.reload()
 }
 
@@ -48,7 +49,6 @@ renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
-
 
 // lights
 const light = new THREE.SpotLight()
@@ -97,6 +97,8 @@ for(let i=0;i < 5;i++) {
 
 // score dis
 const score_dis = document.getElementById("score");
+const hiscore_dis = document.getElementById("hiscore");
+hiscore_dis.innerHTML = localStorage.getItem("score")
 var score = 0
 var add_score = false
 
