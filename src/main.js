@@ -137,9 +137,9 @@ function animate() {
                 add_score = true
             }
 
-            /*if (checkTouching(player,cubes[i])) {
+            if (checkTouching(player,cubes[i])) {
                 death()
-            }*/
+            }
         }
 
         // score

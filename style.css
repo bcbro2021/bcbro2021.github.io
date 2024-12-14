@@ -59,19 +59,13 @@ html {
 }
 
 #restart {
-    text-align: center;
-    margin: 0;
     font-family: font;
     font-size: 4.5vh;
-    width: 10vh;
-    border: 0;
-    border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: transparent;
 }
 #restart:hover {
     font-size: 5vh;
-    width: 10.5vh;
 }
 
 #mainmenu {
@@ -85,18 +79,14 @@ html {
 }
 
 #playbtn {
-    text-align: center;
+
     margin-top: 40vh;
     font-family: font;
     font-size: 5.5vh;
-    border: 0;;
-    border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: transparent;
-    width: 10vh;
 }
 
 #playbtn:hover {
     font-size: 6vh;
-    width: 10.5vh;
 }
