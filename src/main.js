@@ -1,9 +1,12 @@
 import * as THREE from 'https://unpkg.com/three@0.125.2/build/three.module.js';
-import "https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.js"
 
-// assets
-var music = new Howl({src: ['assets/skyhigh.mp3'],loop: true});
-var deathmusic = new Howl({src: ['assets/death.mp3'],loop:true})
+//assets
+var deathaudio = new Audio("assets/death.mp3");
+deathaudio.loop = true;
+
+var music = new Audio("assets/skyhigh.mp3");
+music.volume = 0.5;
+music.loop = true;
 
 // libs
 function createCube(size,clr) {
@@ -39,8 +42,8 @@ function checkTouching(a, d) {
 
 function death(){
     dead = true;
-    music.stop()
-    deathmusic.play()
+    music.pause()
+    deathaudio.play()
     var deathdis = document.getElementById("deathdis");
     deathdis.style.display = "block";
     deathdis.style.animation = "fadeIn 2s";
@@ -272,8 +275,7 @@ document.getElementById("playbtn").addEventListener("click",(ev)=> {
     var menu = document.getElementById("mainmenu");
     menu.style.display = "none";
     dead = false;
-    music.play();
-
+    music.play()
 
 })
 
