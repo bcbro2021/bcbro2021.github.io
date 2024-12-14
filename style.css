@@ -3,6 +3,14 @@
     src: url(src/SmoothieSans.otf);
 }
 
+html {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
 #score {
     position: absolute;
     top: 20px;
