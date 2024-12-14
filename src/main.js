@@ -100,7 +100,7 @@ var cubes = []
 const cube_pos_ops = [-moveSpacingX,0,moveSpacingX]
 const cubeStartMin = 60;
 const cubeStartMax = 100;
-const cubeSpeed = 0.7;
+var cubeSpeed = 0.7;
 const cubeMinSpacing = 10;
 
 for(let i=0;i < 5;i++) {
@@ -115,6 +115,7 @@ for(let i=0;i < 5;i++) {
 const score_dis = document.getElementById("score");
 var score = 0
 var add_score = false
+var ghost_score = 0
 
 const hiscore_dis = document.getElementById("hiscore");
 var hiscore = Number(localStorage.getItem("score"))
@@ -136,14 +137,19 @@ function animate() {
                 add_score = true
             }
 
-            if (checkTouching(player,cubes[i])) {
+            /*if (checkTouching(player,cubes[i])) {
                 death()
-            }
+            }*/
         }
 
         // score
         if (add_score == true) {
             score += 1;
+            ghost_score += 1;
+            if (ghost_score % 50 == 0) {
+                cubeSpeed += 0.05;
+                ghost_score = 0;
+            }
             add_score = false;
         }
         score_dis.innerHTML = String(score)
