@@ -42,7 +42,6 @@ function checkTouching(a, d) {
 
 function death(){
     dead = true;
-    music.pause()
     deathaudio.play()
     var deathdis = document.getElementById("deathdis");
     deathdis.style.display = "block";
@@ -122,6 +121,7 @@ for(let i=0;i < 5;i++) {
 
 
 // score dis
+const scoresdiv = document.getElementById("scores");
 const score_dis = document.getElementById("score");
 var score = 0
 var add_score = false
@@ -131,74 +131,77 @@ const hiscore_dis = document.getElementById("hiscore");
 var hiscore = Number(localStorage.getItem("score"))
 hiscore_dis.innerHTML = hiscore
 
+// pause dis
+var paused = false;
+var pausemenu = document.getElementById("pausemenu");
+
 
 // animation
 function animate() {
     if (dead == false){
-        // camera following player
-        camera.position.x = player.position.x;
-        camera.position.y = player.position.y + 2;
+        if (paused != true) {
+            // camera following player
+            camera.position.x = player.position.x;
+            camera.position.y = player.position.y + 2;
 
-        for (let i = 0;i < cubes.length;i++) {
-            cubes[i].position.z += cubeSpeed;
-            if (cubes[i].position.z > 4.5) {
-                cubes[i].position.x = cube_pos_ops[Math.round(randomRange(0,2))]
-                cubes[i].position.z = -Math.round(randomRange(cubeStartMin,cubeStartMax)/cubeMinSpacing)*cubeMinSpacing;
-                add_score = true
+            for (let i = 0;i < cubes.length;i++) {
+                cubes[i].position.z += cubeSpeed;
+                if (cubes[i].position.z > 4.5) {
+                    cubes[i].position.x = cube_pos_ops[Math.round(randomRange(0,2))]
+                    cubes[i].position.z = -Math.round(randomRange(cubeStartMin,cubeStartMax)/cubeMinSpacing)*cubeMinSpacing;
+                    add_score = true
+                }
+
+                if (checkTouching(player,cubes[i])) {
+                    death()
+                }
             }
 
-            if (checkTouching(player,cubes[i])) {
-                death()
+            // score
+            if (add_score == true) {
+                score += 1;
+                ghost_score += 1;
+                if (ghost_score % 50 == 0) {
+                    cubeSpeed += 0.05;
+                    ghost_score = 0;
+                }
+                add_score = false;
             }
-        }
+            score_dis.innerHTML = String(score)
 
-        // score
-        if (add_score == true) {
-            score += 1;
-            ghost_score += 1;
-            if (ghost_score % 50 == 0) {
-                cubeSpeed += 0.05;
-                ghost_score = 0;
+            // movement
+            if (moveRight == true) {
+                if (player.position.x > targetPos) {
+                    player.position.x -= pspeed
+                } else {
+                    player.position.x = targetPos
+                    moveRight = false;
+                    targetPos = 0;
+                }
+            } else if (moveLeft == true) {
+                if (player.position.x < targetPos) {
+                    player.position.x += pspeed
+                } else {
+                    player.position.x = targetPos
+                    moveLeft = false;
+                    targetPos = 0;
+                }
             }
-            add_score = false;
-        }
-        score_dis.innerHTML = String(score)
 
-        // movement
-        if (moveRight == true) {
-            if (player.position.x > targetPos) {
-                player.position.x -= pspeed
+            // gravity and jumping
+            if (jumping) {
+                player.position.y += pjumpspeed;
+                if (player.position.y >= jumpHeight) {
+                    jumping = false;
+                }
             } else {
-                player.position.x = targetPos
-                moveRight = false;
-                targetPos = 0;
-            }
-        } else if (moveLeft == true) {
-            if (player.position.x < targetPos) {
-                player.position.x += pspeed
-            } else {
-                player.position.x = targetPos
-                moveLeft = false;
-                targetPos = 0;
+                player.position.y -= pgravspeed;
+                if (player.position.y <= 0) {
+                    player.position.y = 0;
+                    onFloor = true;
+                }
             }
         }
-
-        // gravity and jumping
-        if (jumping) {
-            player.position.y += pjumpspeed;
-            if (player.position.y >= jumpHeight) {
-                jumping = false;
-            }
-        } else {
-            player.position.y -= pgravspeed;
-            if (player.position.y <= 0) {
-                player.position.y = 0;
-                onFloor = true;
-            }
-        }
-        
-
-        
     }
 
     renderer.render( scene, camera );
@@ -262,7 +265,16 @@ function handleTouchMove(evt) {
                 onFloor = false;
             }
             
-        } else { 
+        } else { // game pausing
+            if (paused == true) {
+                paused = false;
+                pausemenu.style.display = "none";
+            } 
+            else {
+                paused = true;
+                pausemenu.style.display = "block";
+                pausemenu.style.animation = "fadeIn 1s";
+            }
             
         }                                                                 
     }
@@ -274,8 +286,10 @@ function handleTouchMove(evt) {
 document.getElementById("playbtn").addEventListener("click",(ev)=> {
     var menu = document.getElementById("mainmenu");
     menu.style.display = "none";
+    scoresdiv.style.display = "block";
+    scoresdiv.style.animation = "fadeIn 2s";
+
     dead = false;
-    music.play()
 
 })
 
